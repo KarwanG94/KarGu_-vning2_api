@@ -1,0 +1,23 @@
+{
+  "name": "kargu_-vning2_api",
+  "version": "1.0.0",
+  "description": "**https://api.softhouse.rocks** <br>\r An API that implements jsonplaceholder post and users endpoints, backed by a mongo database.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarwanG94/KarGu_-vning2_api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarwanG94/KarGu_-vning2_api/issues"
+  },
+  "homepage": "https://github.com/KarwanG94/KarGu_-vning2_api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
