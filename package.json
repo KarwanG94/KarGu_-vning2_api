@@ -19,5 +19,6 @@
   "homepage": "https://github.com/KarwanG94/KarGu_-vning2_api#readme",
   "dependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {}
 }
