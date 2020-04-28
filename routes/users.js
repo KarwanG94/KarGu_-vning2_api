@@ -1,40 +1,39 @@
-theUsers = (req, res) => {
-response={
-        "_id": "5ea6f22f13ee69002583acc1",
-        "name": "string",
-        "username": "string",
-        "email": "string",
-        "id": 390,
-        "__v": 0,
-
-        "query": req.query,
-        "params": req.params,
-        "headers": req.headers
+getUsers = (req, res) => {
+  console.log(req.body);
+  response={
+    "_id": "5ea6f22f13ee69002583acc1",
+    "name": "string",
+    "username": "string",
+    "email": "string",
+    "id": req.params.userId,
+    "__v": 0,
     }
     res.status(200)
     res.send(response);
 };
 
 postUsers = (req, res) => {
-   response={
-      "_id": "5ea6f22f13ee69002583acc1",
-      "name": "string",
-      "username": "string",
-      "email": "string",
-      "id": 390,
-      "__v": 0,
-    }
-    res.status(201)
-    res.send(response);
+  console.log(req.body);
+  response={
+    "_id": "5ea6f22f13ee69002583acc1",
+    "name": "string",
+    "username": "string",
+    "email": "string",
+    "id": req.params.userId,
+    "__v": 0,
+  }
+  res.status(201)
+  res.send(response);
 }
 
 putUsers = (req, res) => {
+  console.log(req.body);
   response={
        "_id": "5ea6f22f13ee69002583acc1",
        "name": "string",
        "username": "string",
        "email": "string",
-       "id": 390,
+       "id": req.params.userId,
        "__v": 0,
    }
    res.status(200)
@@ -42,8 +41,7 @@ putUsers = (req, res) => {
 }
 
 module.exports = {
-  theUsers: theUsers,
-  params: theUsers,
+  getUsers: getUsers,
   postUsers: postUsers,
   putUsers: putUsers,
 } 

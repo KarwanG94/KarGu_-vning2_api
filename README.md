@@ -46,7 +46,7 @@ Gets the information in the specified URI and displays it in JSON format
   "userId": 0
 }
 ```
-
+-------------------------------------------------------------------
 ### Method: POST
 #### Example 1:
 ```
@@ -72,7 +72,7 @@ curl -X POST -H "Content-Type:application/json" localhost:3000/posts -d '{"title
   "userId": 0
 }
 ```
-
+-------------------------------------------------------------------
 ### Method: PUT
 #### Example 1<br>
 ```
@@ -104,7 +104,7 @@ curl -X PUT localhost:3000/posts/1 -H "Content-Type:application/json" -d  '{"bod
 }
 ```
 
-
+-------------------------------------------------------------------
 ### Method: PATCH
 #### Example: <br>
 ```
@@ -134,7 +134,7 @@ curl -X PATCH localhost:3000/posts/3 -H "Content-Type:application/json" -d  '{"b
   "userId": 0
 }
 ```
-
+-------------------------------------------------------------------
 ### Method: DELETE
 
 #### Example:
@@ -162,13 +162,15 @@ Status:
 /users - List of users <br>
 /users/{userId} - Gets a specific user with users Id
 
-
+-------------------------------------------------------------------
 ### Method: GET 
 #### Example 1:
 ```
 curl -i -H "Content-Type:application/json" localhost:3000/users/1
 ```
 Gets the information from the specified URI.
+
+response: 200
 
 #### Result will look like this:<br>
 ```
@@ -192,6 +194,24 @@ curl -X GET localhost:3000/users/1 | jq .<br>
 ```
 Gets the information in the specified URI and displays it in JSON format.
 
+### With Parameters:
+```
+curl -H "Content-Type:application/json" "localhost:3000/users?keyWithoutValue&keyWithShit=value" -H "some: header" | jq
+```
+#### result with jq 
+
+```json
+{
+  "_id": "5ea6f22f13ee69002583acc1",
+  "name": "string",
+  "username": "string",
+  "email": "string",
+  "id": 390,
+  "__v": 0,
+  }
+}
+```
+-------------------------------------------------------------------
 
 ### /users
 #### Method: POST
@@ -215,7 +235,7 @@ Description: Create a user
 ```
 
 ##### Example:
-curl -i -X POST -H "Content-Type:application/json" localhost:3000 -d '{
+curl -i -X POST -H "Content-Type:application/json" localhost:3000/users -d '{
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
@@ -223,6 +243,7 @@ curl -i -X POST -H "Content-Type:application/json" localhost:3000 -d '{
   "email": "Sincere@april.biz",
   "__v": 0
 }'
+
 
 Result:
 ```
