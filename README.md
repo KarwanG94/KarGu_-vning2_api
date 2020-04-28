@@ -191,7 +191,10 @@ curl -X GET http://api.softhouse.rocks/users/1 | jq .<br>
 ```
 Gets the information in the specified URI and displays it in JSON format.
 
--------------------------------------------------------------------
+
+### /users
+#### Method: POST
+
 #### /users
 ### Method: POST
 Description: Create a user
