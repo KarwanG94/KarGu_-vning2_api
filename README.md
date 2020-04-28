@@ -190,3 +190,75 @@ curl -X GET http://api.softhouse.rocks/users/1 | jq .<br>
 }
 ```
 Gets the information in the specified URI and displays it in JSON format.
+
+### /users
+#### Method: POST
+Description: Create a user
+#### Headers:
+```"Content-Type: application/json"```
+
+##### Body:
+```
+'{
+  "address": {
+    "geo": {
+      "lat": -37.3159,
+      "lng": 81.1496
+    },
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Shire",
+    "zipcode": "92998-3874"
+  },
+  "_id": "5e806d9f42fbde006b6b9ec5",
+  "id": 1,
+  "name": "Frodo Baggins",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "__v": 0
+}'
+```
+
+##### Example:
+curl -i -X POST -H "Content-Type:application/json" http://api.softhouse.rocks/users -d '{
+  "address": {
+    "geo": {
+      "lat": -37.3159,
+      "lng": 81.1496
+    },
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Shire",
+    "zipcode": "92998-3874"
+  },
+  "_id": "5e806d9f42fbde006b6b9ec5",
+  "id": 1,
+  "name": "Frodo Baggins",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "__v": 0
+}'
+
+Result:
+```
+{
+  "address": {
+    "geo": {
+      "lat": -37.3159,
+      "lng": 81.1496
+    },
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Shire",
+    "zipcode": "92998-3874"
+  },
+  "_id": "5e806d9f42fbde006b6b9ec5",
+  "id": 1,
+  "name": "Frodo Baggins",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "__v": 0
+}
+```
+##### 201 Created
+-------------------------------------------------------------------
