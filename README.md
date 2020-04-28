@@ -191,8 +191,12 @@ curl -X GET http://api.softhouse.rocks/users/1 | jq .<br>
 ```
 Gets the information in the specified URI and displays it in JSON format.
 
+
 ### /users
 #### Method: POST
+
+#### /users
+### Method: POST
 Description: Create a user
 #### Headers:
 ```"Content-Type: application/json"```
@@ -261,4 +265,75 @@ Result:
 }
 ```
 ##### 201 Created
+-------------------------------------------------------------------
+#### /users/{userId}
+### Method: PUT
+Description: Replace a user
+#### Headers:
+```"Content-Type: application/json"```
+
+##### Body:
+```
+{
+  "address": {
+    "geo": {
+      "lat": 0,
+      "lng": 0
+    },
+    "street": "string",
+    "suite": "string",
+    "city": "string",
+    "zipcode": "string"
+  },
+  "_id": "5e806d9f42fbde006b6b9ece",
+  "id": 10,
+  "name": "string",
+  "username": "string",
+  "email": "string",
+  "__v": 0
+}
+
+```
+##### Example:
+curl -i -X PUT -H "Content-Type:application/json" http://api.softhouse.rocks/users/50 -d '{
+  "address": {
+    "geo": {
+      "lat": -37.3159,
+      "lng": 81.1496
+    },
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Shire",
+    "zipcode": "92998-3874"
+  },
+  "_id": "5e806d9f42fbde006b6b9ec5",
+  "id": 1,
+  "name": "Frodo Baggins",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "__v": 0
+}'
+
+Result:
+```
+'{
+  "address": {
+    "geo": {
+      "lat": -37.3159,
+      "lng": 81.1496
+    },
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Shire",
+    "zipcode": "92998-3874"
+  },
+  "_id": "5e806d9f42fbde006b6b9ec5",
+  "id": 1,
+  "name": "Frodo Baggins",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "__v": 0
+}'
+```
+##### 200 OK
 -------------------------------------------------------------------
