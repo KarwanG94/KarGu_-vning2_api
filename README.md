@@ -1,6 +1,6 @@
 # KarGu_-vning2_api
 # Intro:
-**https://api.softhouse.rocks** <br>
+**localhost:3000** <br>
 An API that implements jsonplaceholder post and users endpoints, backed by a mongo database.
 
 The purpose for this API is educational and meant as a step between using jsonplaceholder in a UI and implementing your own API.
@@ -21,7 +21,7 @@ The purpose for this API is educational and meant as a step between using jsonpl
 
 #### Example 1:
 ```
-curl -i -H "Content-Type:application/json" http://api.softhouse.rocks/posts/1
+curl -i -H "Content-Type:application/json" localhost:3000/posts/1
 ```
 
 Gets the information from the specified URI
@@ -33,7 +33,7 @@ Gets the information from the specified URI
 
 #### Example 2 with jq and {postId}:
 ```
-curl http://api.softhouse.rocks/posts/1 | jq .
+curl localhost:3000/posts/1 | jq .
 ```
 
 Gets the information in the specified URI and displays it in JSON format
@@ -41,19 +41,16 @@ Gets the information in the specified URI and displays it in JSON format
 **The result will look like this:**<br>
 ```json
   {
-    "_id": "5e9ecdbd3c9c34a2d807ce9d",
-    "id": 1,
-    "__v": 0,
-    "body": "string",
-    "title": "string",
-    "userId": 1
-  }
+  "title": "string",
+  "body": "string",
+  "userId": 0
+}
 ```
 
 ### Method: POST
 #### Example 1:
 ```
-curl -i -X POST -H "Content-Type:application/json" http://api.softhouse.rocks/posts -d '{"title":"Hi, World", "body":"Fresh as morning dew", "userId": "1"}' 
+curl -i -X POST -H "Content-Type:application/json" localhost:3000/posts -d '{"title":"Hi, World", "body":"Fresh as morning dew", "userId": "1"}' 
 ```
 
 Posts the information you give to the Object
@@ -64,21 +61,22 @@ Posts the information you give to the Object
 ```
 
 #### Example 2 with jq:
+```
+curl -X POST -H "Content-Type:application/json" localhost:3000/posts -d '{"title":"Hi, World", "body":"Fresh as morning dew", "userId": "1"}' | jq
+```
+
 ```json
-{
-  "_id": "5e9eadf3a8eb15002609e47b",
-  "body": "Fresh as morning dew",
-  "title": "Hi, World",
-  "userId": 1,
-  "id": 807,
-  "__v": 0
+ {
+  "title": "string",
+  "body": "string",
+  "userId": 0
 }
 ```
 
 ### Method: PUT
 #### Example 1<br>
 ```
-curl -i -X PUT http://api.softhouse.rocks/posts/3 -H "Content-Type:application/json" -d  '{
+curl -i -X PUT localhost:3000/posts/3 -H "Content-Type:application/json" -d  '{
   "body": "NewBody", "title": "NewTitle", "userId": "1337"}'
 ```
 
@@ -94,14 +92,15 @@ Returns body with the old information, should look like this
 ```
 
 With jq:
+#### Example with jq
+```
+curl -X PUT localhost:3000/posts/1 -H "Content-Type:application/json" -d  '{"body": "NewBody", "title": "NewTitle", "userId": "1337"}' | jq
+```
 ```json
-{
-  "_id": "5ea14af48e9e2e7dc0da885c",
-  "id": 3,
-  "__v": 0,
-  "body": "NewBody",
-  "title": "NewTitle",
-  "userId": 1337
+ {
+  "title": "string",
+  "body": "string",
+  "userId": 0
 }
 ```
 
@@ -109,7 +108,7 @@ With jq:
 ### Method: PATCH
 #### Example: <br>
 ```
-curl -i -X PATCH http://api.softhouse.rocks/posts/3 -H "Content-Type:application/json" -d  '{
+curl -i -X PATCH localhost:3000/posts/3 -H "Content-Type:application/json" -d  '{
   "body": "newBody", "userId": "3"}'
 ```
   Updates a part of the object on the specified path, depending on the provided data
@@ -124,11 +123,23 @@ Returns body with the updated information
 {"body": "newBody", "title": "oldTitle", userId": "3"}
 ```
 
+#### Example with jq
+```
+curl -X PATCH localhost:3000/posts/3 -H "Content-Type:application/json" -d  '{"body": "newBody", "userId": "3"}' | jq
+```
+```json
+{
+  "title": "string",
+  "body": "string",
+  "userId": 0
+}
+```
+
 ### Method: DELETE
 
 #### Example:
 ```
-curl -i -X DELETE http://api.softhouse.rocks/posts/1
+curl -i -X DELETE localhost:3000/posts/1
 ```
 
 Deletes an object or endpoint at the specified path
@@ -155,7 +166,7 @@ Status:
 ### Method: GET 
 #### Example 1:
 ```
-curl -i -H "Content-Type:application/json" http://api.softhouse.rocks/users/1
+curl -i -H "Content-Type:application/json" localhost:3000/users/1
 ```
 Gets the information from the specified URI.
 
@@ -166,21 +177,11 @@ Gets the information from the specified URI.
 
 #### Example 2 with jq:
 ```
-curl -X GET http://api.softhouse.rocks/users/1 | jq .<br>
+curl -X GET localhost:3000/users/1 | jq .<br>
 ```
 
 ```json
 {
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Gwenborough",
-    "zipcode": "92998-3874"
-  },
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Leanne Graham",
@@ -204,16 +205,6 @@ Description: Create a user
 ##### Body:
 ```
 '{
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Shire",
-    "zipcode": "92998-3874"
-  },
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
@@ -224,17 +215,7 @@ Description: Create a user
 ```
 
 ##### Example:
-curl -i -X POST -H "Content-Type:application/json" http://api.softhouse.rocks/users -d '{
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Shire",
-    "zipcode": "92998-3874"
-  },
+curl -i -X POST -H "Content-Type:application/json" localhost:3000 -d '{
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
@@ -246,16 +227,6 @@ curl -i -X POST -H "Content-Type:application/json" http://api.softhouse.rocks/us
 Result:
 ```
 {
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Shire",
-    "zipcode": "92998-3874"
-  },
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
@@ -275,16 +246,6 @@ Description: Replace a user
 ##### Body:
 ```
 {
-  "address": {
-    "geo": {
-      "lat": 0,
-      "lng": 0
-    },
-    "street": "string",
-    "suite": "string",
-    "city": "string",
-    "zipcode": "string"
-  },
   "_id": "5e806d9f42fbde006b6b9ece",
   "id": 10,
   "name": "string",
@@ -295,17 +256,7 @@ Description: Replace a user
 
 ```
 ##### Example:
-curl -i -X PUT -H "Content-Type:application/json" http://api.softhouse.rocks/users/50 -d '{
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Shire",
-    "zipcode": "92998-3874"
-  },
+curl -i -X PUT -H "Content-Type:application/json" localhost:3000/users/1 -d '{
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
@@ -317,16 +268,6 @@ curl -i -X PUT -H "Content-Type:application/json" http://api.softhouse.rocks/use
 Result:
 ```
 '{
-  "address": {
-    "geo": {
-      "lat": -37.3159,
-      "lng": 81.1496
-    },
-    "street": "Kulas Light",
-    "suite": "Apt. 556",
-    "city": "Shire",
-    "zipcode": "92998-3874"
-  },
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
   "name": "Frodo Baggins",
