@@ -2,7 +2,7 @@ getPosts = (req, res) => {
   response = {
     "body": "string",
     "title": "string",
-    "userId": req.params.userId
+    "userId": req.params.postId
   }
   res.status(200)
   res.send(response);
@@ -12,7 +12,7 @@ postPosts = (req, res) => {
   response={ 
     "body": "string",
     "title": "string",
-    "userId": req.params.userId
+    "userId": req.params.postId
   }
   res.status(201)
   res.send(response);
@@ -22,7 +22,7 @@ putPosts = (req, res) => {
   response={
       "title": "string",
       "body": "string",
-      "userId": req.params.userId
+      "userId": req.params.postId
     }
   res.status(200)
   res.send(response);
@@ -32,7 +32,7 @@ patchPosts = (req, res) => {
   response={
       "title": "string",
       "body": "string",
-      "userId": req.params.userId
+      "userId": req.params.postId
     }
   res.status(200)
   res.send(response);
@@ -42,7 +42,7 @@ deletePosts = (req, res) => {
   response = {
       "title": "string",
       "body": "string",
-      "userId": req.params.userId
+      "userId": req.params.postId
     }
   res.status(200)
   res.send(response);
