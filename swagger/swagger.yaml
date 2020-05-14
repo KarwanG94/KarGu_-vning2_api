@@ -1,0 +1,210 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Users 
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:4000
+paths:
+  /api/users:
+    get:
+      summary: List all users
+      operationId: listUsers
+      tags: # Rubriker
+        - User
+      responses:
+        '200':
+          description: Array of users
+          content:
+            application/json:    
+              schema:
+                $ref: '#/components/schemas/ResponseUsers'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a User
+      operationId: createUser
+      tags:
+        - User
+      requestBody:
+        description: create a user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseUser'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/users/{userId}:
+    get:
+      summary: Info for a specific user
+      operationId: showUserById
+      tags:
+        - User
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: The id of the user to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseUser"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update a specific user
+      operationId: updateUserByID
+      tags:
+        - User
+      requestBody:
+        description: update user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: The id of the user to retrieve
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseUser"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Error"
+    patch:
+      summary: Update a specific user
+      operationId: updateUserPropByID
+      tags:
+        - User
+      requestBody:
+        description: update user properties
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        description: The id of the user to update
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseUser"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a specific user
+      operationId: deleteUserByID
+      tags: 
+        - User
+      parameters: 
+      - name: userId
+        in: path
+        required: true
+        description: Deletes the user
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Expected respsone to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseUser"
+        '204':
+          description: Valid request but there is nothing to delete
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        address:
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            zipcode:
+              type: string
+    ResponseUser:
+      allOf:
+      - $ref: "#/components/schemas/User"
+      - properties:
+          id:
+            type: integer
+          _id:
+            type: string
+            format: uuid
+    ResponseUsers:
+      type: array
+      items:
+        $ref: "#/components/schemas/ResponseUser"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    
