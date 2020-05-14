@@ -1,6 +1,5 @@
 const dotify = require('node-dotify');
 
-
 getUsers = (req, res, next) => {
   var query;
   if(req.query.username) {
@@ -24,15 +23,15 @@ postUser = (req, res, next) => {
     name: req.body.name,
     username: req.body.username,
     email: req.body.email,
-    address: {
-      street: req.body.address.street,
-      suite: req.body.address.suite,
-      city: req.body.address.city,
-      zipcode: req.body.address.zipcode,
-      geo: {
-        lat: req.body.address.geo.lat,
-        lng: req.body.address.geo.lng,
-      }
+     address: {
+       street: req.body.address.street,
+    //   suite: req.body.address.suite,
+       city: req.body.address.city,
+       zipcode: req.body.address.zipcode,
+    //   geo: {
+    //     lat: req.body.address.geo.lat,
+    //     lng: req.body.address.geo.lng,
+    //   }
     }
   }).then((user) => {
     return res.status(201).send(user)
@@ -55,9 +54,6 @@ deleteById = (req, res, next) => {
   }).catch((error) => next(error))
 }
 
-
-
-
 putUser = (req, res, next) => {
   req.models.User.updateOne({_id: req.params.id},
     {
@@ -66,13 +62,13 @@ putUser = (req, res, next) => {
       email: req.body.email,
       address: {
         street: req.body.address.street,
-        suite: req.body.address.suite,
+        // suite: req.body.address.suite,
         city: req.body.address.city,
         zipcode: req.body.address.zipcode,
-        geo: {
-          lat: req.body.address.geo.lat,
-          lng: req.body.address.geo.lng,
-        }
+        // geo: {
+        //   lat: req.body.address.geo.lat,
+        //   lng: req.body.address.geo.lng,
+        // }
       },
     },{
       new: true,
@@ -80,14 +76,20 @@ putUser = (req, res, next) => {
       runvalidators: true,
     }).then((status) => {
       console.log("status: ", status)
-      if (status.upserted)
-        res.status(201)
+      req.models.User.findById(req.params.id)
+      .then((user)=> {
+        if (status.upserted)
+        res.status(201).send(user)
+     
+        
       else if (status.nModified)
-        res.status(200)
+        res.status(200).send(user)
       else 
         res.status(204)
     res.send()
     }).catch((error) => next(error))
+      })
+  
 }
 
 
@@ -114,36 +116,3 @@ module.exports = {
   putUser: putUser,
   patchUser: patchUser,
 } 
-
-
-
-
-// postUsers = (req, res) => {
-//   console.log(req.body);
-//   response={
-//     "_id": "5ea6f22f13ee69002583acc1",
-//     "name": "string",
-//     "username": "string",
-//     "email": "string",
-//     "id": req.params.userId,
-//     "__v": 0,
-//   }
-//   res.status(201)
-//   res.send(response);
-// }
-
-
-
-// getUsers = (req, res) => {
-//   console.log(req.body);
-//   response={
-//     "_id": "5ea6f22f13ee69002583acc1",
-//     "name": "string",
-//     "username": "string",
-//     "email": "string",
-//     "id": req.params.userId,
-//     "__v": 0,
-//     }
-//     res.status(200)
-//     res.send(response);
-// };

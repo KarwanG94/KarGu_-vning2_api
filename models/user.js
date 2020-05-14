@@ -16,19 +16,19 @@ const userSchema = new mongoose.Schema({
   address: {
     street: {
       type: String,
-      unique: true
+      
     },
-    suite: String,
+    // suite: String,
     city: String,
     zipcode: String,
-    geo: {
-      lat: {
-        type: Number,
-      },
-      lng: {
-        type: Number,
-      }
-    }
+    // geo: {
+    //   lat: {
+    //     type: Number,
+    //   },
+    //   lng: {
+    //     type: Number,
+    //   }
+    // }
   }
 });
 

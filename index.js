@@ -7,11 +7,13 @@ var cors = require('cors')
 
 app.use(cors())
 
-// environment variable PORT or 3000 if unset
-const port = process.env.PORT || 3001;
+// environment variable PORT or 4000 if unset
+const port = process.env.PORT || 4000;
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true, useUnifiedTopology: true }))
+
+/* app.use('/', cors(), express.static('swagger')) */
 
 app.use((req, res, next) => {
   req.models = db.models
@@ -20,8 +22,13 @@ app.use((req, res, next) => {
 
 app.use('/api', routes)
 
-db.connectDb().then(() => {
-  const listener = app.listen(port, () => {
-    console.info(`Server is listening on port ${listener.address().port}.`);
-  })
+if(process.env.NODE_ENV != "test") {
+  db.connectDb().then(() => {
+    const listener = app.listen(port, () => {
+      console.info(`Server is listening on port ${listener.address().port}.`);
+    })
 });
+
+}
+
+module.exports = app;

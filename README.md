@@ -166,7 +166,7 @@ Status:
 ### Method: GET 
 #### Example 1:
 ```
-curl -i -H "Content-Type:application/json" localhost:3000/users/1
+curl -i -H "Content-Type:application/json" localhost:4000/api/users/
 ```
 Gets the information from the specified URI.
 
@@ -179,16 +179,16 @@ response: 200
 
 #### Example 2 with jq:
 ```
-curl -X GET localhost:3000/users/1 | jq .<br>
+curl -H "Content-Type:application/json" localhost:3001/api/users/ | jq .<br>
 ```
 
 ```json
 {
   "_id": "5e806d9f42fbde006b6b9ec5",
   "id": 1,
-  "name": "Leanne Graham",
-  "username": "Bret",
-  "email": "Sincere@april.biz",
+  "name": "Some name",
+  "username": "Some Username",
+  "email": "Some@email.com",
   "__v": 0
 }
 ```
@@ -235,13 +235,15 @@ Description: Create a user
 ```
 
 ##### Example:
-curl -i -X POST -H "Content-Type:application/json" localhost:3000/users -d '{
-  "_id": "5e806d9f42fbde006b6b9ec5",
-  "id": 1,
-  "name": "Frodo Baggins",
-  "username": "Bret",
-  "email": "Sincere@april.biz",
-  "__v": 0
+curl -i -X POST -H "Content-Type:application/json" localhost:3001/api/users -d '{
+  "name": "sauroman Assface",
+  "username": "Lokiman",
+  "email": "bitbucket66@hore.com",
+  "address": {
+    "street": "Grovestreet",
+    "city": "Fittja",
+    "zipcode": "665 55"
+  }
 }'
 
 
@@ -277,13 +279,15 @@ Description: Replace a user
 
 ```
 ##### Example:
-curl -i -X PUT -H "Content-Type:application/json" localhost:3000/users/1 -d '{
-  "_id": "5e806d9f42fbde006b6b9ec5",
-  "id": 1,
+curl -i -X PUT -H "Content-Type:application/json" localhost:3001/api/users/5eba747fbca5c1172c93f5c7 -d '{
   "name": "Frodo Baggins",
   "username": "Bret",
   "email": "Sincere@april.biz",
-  "__v": 0
+  "address": {
+    "street": "Grovestreet",
+    "city": "Fittja",
+    "zipcode": "665 55"
+  }
 }'
 
 Result:
@@ -299,3 +303,23 @@ Result:
 ```
 ##### 200 OK
 -------------------------------------------------------------------
+
+## METHOD: DELETE
+
+#### Example
+
+curl -i -X DELETE -H "Content-Type:application/json" localhost:3001/api/users/{the uniq ID}
+5eba42e91daba71d456ff7f5
+##### Resul:
+```
+TP/1.1 200 OK
+X-Powered-By: Express
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 190
+ETag: W/"be-57B1DUVisUC4dBlAzZaaHPQddzs"
+Date: Sat, 09 May 2020 15:41:26 GMT
+Connection: keep-alive
+
+{"address":{"street":"Grovestreet","city":"Fittja","zipcode":"665 55"},"_id":"5eb6cd75baca0699dcd76005","name":"sauroman Assface","username":"Lokiman","email":"bitbucket66@hore.com","__v":0}
+```
